@@ -158,3 +158,13 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+*.wt
+*.2023-05-30T19-21-54Z-00000
+*.0000000001
+*.0000000002
+*.lock
+*.bson
+app/data/WiredTiger
+*.turtle
+*.2023-05-30T19-11-55Z-00000
+data/WiredTiger
