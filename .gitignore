@@ -168,3 +168,6 @@ app/data/WiredTiger
 *.turtle
 *.2023-05-30T19-11-55Z-00000
 data/WiredTiger
+
+data
+.DS_Store

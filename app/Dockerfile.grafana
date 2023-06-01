@@ -1,0 +1,3 @@
+FROM grafana/grafana:latest
+COPY dashboard.json /var/lib/grafana/dashboards/dashboard.json
+

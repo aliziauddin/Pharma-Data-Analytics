@@ -5,7 +5,7 @@ from logger import myLogger
 from flask_pymongo import PyMongo
 from file_helper import save_file
 from flask_cors import CORS
-from data import insertBulk, get_gmv,get_order_count, get_median_sales, get_user_retention,get_avg_order_value,get_total_docs,get_products_with_count, get_orders
+from data import insertBulk, get_gmv,get_order_count, get_median_sales, get_user_retention,get_avg_order_value,get_total_docs,get_products_with_count, get_orders,get_orders_by_month, get_top_selling_products
 
 LOGGER = myLogger()
 
@@ -19,7 +19,8 @@ cors = CORS(app, resources={r"/": {"origins": "*"}})
 app.config['SECRET_KEY'] = "!5CP7k0Dw9RhJ#XzL@!b"
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['UPLOAD_FOLDER'] = ABS_UPLOAD_FOLDER_PATH
-app.config["MONGO_URI"] = "mongodb://localhost:27017/pharma"
+app.config["MONGO_URI"] = "mongodb://app-mongo-1:27017/pharma"
+# app.config["MONGO_URI"] = "mongodb://localhost:27017/pharma"
 app.config['SESSION_TYPE'] = 'filesystem'
 
 CORS(app, expose_headers='Authorization')
@@ -138,6 +139,19 @@ def orders():
     dateTo = args.get("dateTo", default=None, type=str)
 
     return get_orders(db=mongo.db, dateFrom=dateFrom, dateTo=dateTo)
+
+@app.route('/orders-by-month', methods=['GET'])
+def orders_by_month():
+    return get_orders_by_month(db=mongo.db)
+
+@app.route('/top-selling-products', methods=['GET'])
+def top_selling_products():
+    args = request.args
+    dateFrom = args.get("dateFrom", default=None, type=str)
+    dateTo = args.get("dateTo", default=None, type=str)
+
+    return get_top_selling_products(db=mongo.db, dateFrom=dateFrom, dateTo=dateTo)
+    
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000, use_reloader=True)

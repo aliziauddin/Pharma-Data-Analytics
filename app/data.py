@@ -64,7 +64,7 @@ def get_user_retention(db,dateFrom=None, dateTo=None):
     date_from = datetime.fromisoformat(dateFrom)
     date_to = datetime.fromisoformat(dateTo)
     previous_month_from = date_from - timedelta(days=31)  # Start date of the previous month
-    previous_month_to = date_to - timedelta(days=31)  # End date of the previous month
+    previous_month_to = previous_month_from + timedelta(days=31)  # End date of the previous month
     # Aggregation pipeline to calculate user ID retention
     pipeline = [
         {"$match": {"Date": {"$gte": previous_month_from, "$lte": previous_month_to}}},
@@ -197,3 +197,56 @@ def get_orders(db,dateFrom=None, dateTo=None):
     ]
     result = list(db.sales.aggregate(pipeline))
     return result[:10]
+
+
+def get_orders_by_month(db):
+    pipeline = [
+        {
+            "$group": {
+                "_id": {
+                    "$dateToString": {
+                        "format": "%Y-%m",
+                        "date": "$Date"
+                    }
+                },
+                "count": {"$sum": 1}
+            }
+        },
+        {
+        "$project": {
+            "_id": 0,  
+            "Month": "$_id",  
+            "Count": "$count"  
+            }
+        },
+        {
+            "$sort": {"Month": 1}
+        }
+    ]
+
+    result = list(db.sales.aggregate(pipeline))
+
+    return result
+
+def get_top_selling_products(db,dateFrom=None, dateTo=None):
+    query = create_date_query(dateFrom, dateTo) 
+    pipeline = []
+    if dateFrom or dateTo:
+        pipeline.append({"$match": query})
+    pipeline += [
+        {
+            "$group": {
+                "_id": "$Product", 
+                "totalSales": { "$sum": "$GMV" }, 
+                "averageSales": { "$avg": "$GMV" }, 
+                "orderCount": { "$sum": 1 }
+                }
+        },
+        {
+            "$sort": { "totalSales": -1 } 
+        }
+    ]
+
+    results= list(db.sales.aggregate(pipeline))
+
+    return results[:10]
