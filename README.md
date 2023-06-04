@@ -2,7 +2,7 @@
 
 This project is a Flask application that provides a dashboard for tracking medicine and wellness sales data. It is connected to a MongoDB database and utilizes Grafana for data visualization.
 
-![dashboard]([images/your_image_file.jpg](https://raw.githubusercontent.com/aliziauddin/Pharma-Data-Analytics/main/screenshot/Screenshot%202023-05-31%20at%2012.19.53%20AM.png))
+![dashboard](https://raw.githubusercontent.com/aliziauddin/Pharma-Data-Analytics/main/screenshot/Screenshot%202023-05-31%20at%2012.19.53%20AM.png)
 
 ## 🚀 Getting Started
 
