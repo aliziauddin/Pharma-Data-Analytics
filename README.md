@@ -48,7 +48,3 @@ This command will start the Flask app along with the MongoDB database. It will l
 ## 🤝 Contributing
 
 Contributions to this project are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request. Make sure to follow the existing coding style and conventions 👥🙌.
-
-```
-
-```
