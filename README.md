@@ -46,7 +46,3 @@ This command will start the Flask app along with the MongoDB database. It will l
 - **Database Configuration**: The connection details for the MongoDB database can be configured in the `server.py` file. Update the `MONGO_URI` variable with the appropriate MongoDB connection string ⚙️🔧.
 
 - **Grafana Integration**: Grafana is configured to connect to the MongoDB database and retrieve sales data for visualization. You may need to configure the data source settings in Grafana to point to the correct MongoDB instance 📈🔌.
-
-## 🤝 Contributing
-
-Contributions to this project are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request. Make sure to follow the existing coding style and conventions 👥🙌.
