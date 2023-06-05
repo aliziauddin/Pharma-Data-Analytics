@@ -1,3 +1,12 @@
+# Use the official Grafana base image
 FROM grafana/grafana:latest
-COPY dashboard.json /var/lib/grafana/dashboards/dashboard.json
 
+# Copy the provisioning files into the container
+COPY grafana/provisioning/datasources /etc/grafana/provisioning/datasources
+COPY grafana/provisioning/dashboards /etc/grafana/provisioning/dashboards
+
+# Expose the Grafana port
+EXPOSE 3000
+
+# Start Grafana
+CMD ["grafana-server", "--config=/etc/grafana/grafana.ini", "--homepath=/usr/share/grafana"]

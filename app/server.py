@@ -29,6 +29,7 @@ mongo = PyMongo(app)
 
 try:
     mongo.db.command('ping')
+
     print("🚀 Connected to MongoDB!")
 except:
     print("😞 Could not connect to MongoDB.")
@@ -81,14 +82,14 @@ def fileUpload():
 ################################### DASHBOARD ###################################
 @app.route('/totaldocs', methods=['GET'])
 def total_docs():
-    return get_total_docs(db=mongo.db)
+    return get_total_docs(db=mongo.db, logger=LOGGER)
 
 @app.route('/gmv', methods=['GET'])
 def gmv():
     args = request.args
     dateFrom = args.get("dateFrom", default=None, type=str)
     dateTo = args.get("dateTo", default=None, type=str)
-    return get_gmv(db=mongo.db, dateFrom=dateFrom, dateTo=dateTo)
+    return get_gmv(db=mongo.db, dateFrom=dateFrom, dateTo=dateTo, logger=LOGGER)
    
 
 @app.route('/ordercount', methods=['GET'])
@@ -97,7 +98,7 @@ def order_count():
     dateFrom = args.get("dateFrom", default=None, type=str)
     dateTo = args.get("dateTo", default=None, type=str)
 
-    return get_order_count(db=mongo.db, dateFrom=dateFrom, dateTo=dateTo)
+    return get_order_count(db=mongo.db, dateFrom=dateFrom, dateTo=dateTo, logger=LOGGER)
 
 @app.route('/mediansales', methods=['GET'])
 def median_sales():
@@ -105,7 +106,7 @@ def median_sales():
     dateFrom = args.get("dateFrom", default=None, type=str)
     dateTo = args.get("dateTo", default=None, type=str)
 
-    return get_median_sales(db=mongo.db, dateFrom=dateFrom, dateTo=dateTo)
+    return get_median_sales(db=mongo.db, dateFrom=dateFrom, dateTo=dateTo, logger=LOGGER)
 
 
 @app.route('/userretention', methods=['GET'])
@@ -114,7 +115,7 @@ def user_retention():
     dateFrom = args.get("dateFrom", default=None, type=str)
     dateTo = args.get("dateTo", default=None, type=str)
 
-    return get_user_retention(db=mongo.db, dateFrom=dateFrom, dateTo=dateTo)
+    return get_user_retention(db=mongo.db, dateFrom=dateFrom, dateTo=dateTo, logger=LOGGER)
 
 @app.route('/avgordervalues', methods=['GET'])
 def avg_order_values():
@@ -122,7 +123,7 @@ def avg_order_values():
     dateFrom = args.get("dateFrom", default=None, type=str)
     dateTo = args.get("dateTo", default=None, type=str)
 
-    return get_avg_order_value(db=mongo.db, dateFrom=dateFrom, dateTo=dateTo)
+    return get_avg_order_value(db=mongo.db, dateFrom=dateFrom, dateTo=dateTo, logger=LOGGER)
 
 @app.route('/productswithcount', methods=['GET'])
 def products_with_count():
@@ -130,7 +131,7 @@ def products_with_count():
     dateFrom = args.get("dateFrom", default=None, type=str)
     dateTo = args.get("dateTo", default=None, type=str)
 
-    return get_products_with_count(db=mongo.db, dateFrom=dateFrom, dateTo=dateTo)
+    return get_products_with_count(db=mongo.db, dateFrom=dateFrom, dateTo=dateTo, logger=LOGGER)
 
 @app.route('/orders', methods=['GET'])
 def orders():
@@ -138,11 +139,11 @@ def orders():
     dateFrom = args.get("dateFrom", default=None, type=str)
     dateTo = args.get("dateTo", default=None, type=str)
 
-    return get_orders(db=mongo.db, dateFrom=dateFrom, dateTo=dateTo)
+    return get_orders(db=mongo.db, dateFrom=dateFrom, dateTo=dateTo, logger=LOGGER)
 
 @app.route('/orders-by-month', methods=['GET'])
 def orders_by_month():
-    return get_orders_by_month(db=mongo.db)
+    return get_orders_by_month(db=mongo.db, logger=LOGGER)
 
 @app.route('/top-selling-products', methods=['GET'])
 def top_selling_products():
@@ -150,7 +151,7 @@ def top_selling_products():
     dateFrom = args.get("dateFrom", default=None, type=str)
     dateTo = args.get("dateTo", default=None, type=str)
 
-    return get_top_selling_products(db=mongo.db, dateFrom=dateFrom, dateTo=dateTo)
+    return get_top_selling_products(db=mongo.db, dateFrom=dateFrom, dateTo=dateTo, logger=LOGGER)
     
 
 if __name__ == "__main__":
