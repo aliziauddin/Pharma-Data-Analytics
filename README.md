@@ -1,4 +1,4 @@
-# 💊 Medicine and Wellness Sales Dashboard
+# 💊 Medicine Sales Dashboard
 
 This project is a Flask application that provides a dashboard for tracking medicine and wellness sales data. It is connected to a MongoDB database and utilizes Grafana for data visualization.
 
